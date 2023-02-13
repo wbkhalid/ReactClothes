@@ -13,7 +13,7 @@ const NavigationBar = () => {
         <NavLink className='logo_container' to='/shop'>
             shop
         </NavLink>
-        <NavLink className='logo_container' to='/signin'>
+        <NavLink className='logo_container' to='/auth'>
             Sign In
         </NavLink>
         </div>
