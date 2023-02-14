@@ -1,13 +1,12 @@
-import { useState , useContext} from 'react';
+import { useState } from 'react';
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
+  signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
 import Button from '../button/Button';
 import FormInputs from '../form-inputs/FormInputs';
 import './signIn.styles.scss';
-import { UserContext } from '../../context/context';
 
 const defaultFormFields = {
   email: '',
@@ -18,15 +17,13 @@ const SignInForm = () => {
   const [formFields, setFormFiels] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-const {setCurrentUser} = useContext(UserContext)
-
   const reSetFormFiels = () => {
     setFormFiels(defaultFormFields);
   };
 
   const SignInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+   await signInWithGooglePopup();
+    
   };
 
   const handleChange = (e) => {
@@ -37,8 +34,8 @@ const {setCurrentUser} = useContext(UserContext)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {user} =await signInAuthUserWithEmailAndPassword(email,password)
-      setCurrentUser(user)
+      await signInAuthUserWithEmailAndPassword(email, password);
+      // setCurrentUser(user)
     } catch (error) {
       console.error(error);
     }
@@ -67,7 +64,7 @@ const {setCurrentUser} = useContext(UserContext)
         />
         <div className="buttons">
           <Button type="submit">Sign In</Button>
-          <Button type='button' buttonType="google" onClick={SignInWithGoogle}>
+          <Button type="button" buttonType="google" onClick={SignInWithGoogle}>
             Sign In With Google
           </Button>
         </div>
