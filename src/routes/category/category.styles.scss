@@ -1,0 +1,14 @@
+
+.category-title{
+    font-size: 30PX;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+}
+.category-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    row-gap: 2rem;
+    column-gap: 1rem;
+}
+
