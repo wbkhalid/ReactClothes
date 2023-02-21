@@ -1,5 +1,9 @@
-import './navigationbar.styles.scss';
-import { NavLink, Outlet } from 'react-router-dom';
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinks,
+} from './navigationbar.styles';
+import { Outlet } from 'react-router-dom';
 import { ReactComponent as Crwnlogo } from '../../assests/crown.svg';
 import { UserContext } from '../../context/userContext';
 import { useContext } from 'react';
@@ -14,27 +18,21 @@ const NavigationBar = () => {
 
   return (
     <>
-      <div className="navigation">
-        <NavLink className="logo_container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <Crwnlogo />
-        </NavLink>
-        <div className="nav_links_container">
-          <NavLink className="logo_container" to="/shop">
-            shop
-          </NavLink>
+        </LogoContainer>
+        <NavLinks>
+          <LogoContainer to="/shop">shop</LogoContainer>
           {currentUser ? (
-            <NavLink className="logo_container" onClick={signOutAuthUser}>
-              Sign Out
-            </NavLink>
+            <LogoContainer onClick={signOutAuthUser}>Sign Out</LogoContainer>
           ) : (
-            <NavLink className="logo_container" to="/auth">
-              Sign In
-            </NavLink>
+            <LogoContainer to="/auth">Sign In</LogoContainer>
           )}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartOpen && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );
